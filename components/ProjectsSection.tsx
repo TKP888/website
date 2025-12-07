@@ -1,3 +1,4 @@
+import React from "react";
 import ProjectCard from "./ProjectCard";
 
 export interface ProjectItem {
@@ -6,6 +7,16 @@ export interface ProjectItem {
   subtitle?: string;
   imageUrls: string[];
   href?: string;
+  description: string | React.ReactNode;
+  techStack: {
+    frontend?: string[];
+    backend?: string[];
+    testing?: string[];
+    devTools?: string[];
+  };
+  features: string[];
+  githubUrl?: string;
+  demoUrl?: string;
 }
 
 interface ProjectsSectionProps {
@@ -14,14 +25,15 @@ interface ProjectsSectionProps {
 
 export default function ProjectsSection({ items }: ProjectsSectionProps) {
   return (
-    <section className="w-full py-16 md:py-24 bg-slate-900">
+    <section
+      id="projects"
+      className="w-full py-16 md:py-24 bg-slate-900 scroll-mt-28"
+    >
       <div className="container mx-auto px-4">
-        {/* Section Title */}
         <h2 className="text-4xl md:text-5xl font-bold text-slate-100 mb-12 text-center">
-          Projects
+          Recent Projects
         </h2>
-        
-        {/* Projects Grid */}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
           {items.map((item) => (
             <ProjectCard
@@ -38,4 +50,3 @@ export default function ProjectsSection({ items }: ProjectsSectionProps) {
     </section>
   );
 }
-

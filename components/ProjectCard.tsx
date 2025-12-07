@@ -25,12 +25,10 @@ export default function ProjectCard({
   const startCycling = () => {
     if (imageUrls.length <= 1) return;
 
-    // Clear any existing interval
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
 
-    // Start new interval
     intervalRef.current = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
     }, 2000); // 2 seconds
@@ -41,11 +39,9 @@ export default function ProjectCard({
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
-    // Reset to first image
     setCurrentImageIndex(0);
   };
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (intervalRef.current) {
@@ -60,7 +56,6 @@ export default function ProjectCard({
       onMouseEnter={startCycling}
       onMouseLeave={stopCycling}
     >
-      {/* Background Images with Cycling */}
       {imageUrls.map((imageUrl, index) => (
         <Image
           key={`${id}-${index}`}
@@ -76,10 +71,8 @@ export default function ProjectCard({
         />
       ))}
 
-      {/* Dark Overlay for Text Readability */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-      {/* Text Overlay at Bottom */}
       <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
         {subtitle && (
           <p className="text-sm md:text-base text-slate-300 mb-2 opacity-90">

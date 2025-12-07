@@ -10,7 +10,7 @@ export default function Footer() {
           </p>
           <div className="flex space-x-6">
             <Link
-              href="https://github.com"
+              href="https://github.com/TKP888"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-blue-400 transition-colors"
@@ -30,7 +30,7 @@ export default function Footer() {
               </svg>
             </Link>
             <Link
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/akpetsas"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-blue-400 transition-colors"
