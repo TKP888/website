@@ -7,7 +7,7 @@ export default function Hero() {
       className="container mx-auto px-4 min-h-[calc(100vh-200px)] flex items-center justify-center scroll-mt-28"
     >
       <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 w-full max-w-6xl">
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 mt-6 md:mt-0">
           <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-8 border-whites shadow-lg">
             <Image
               src="/Ant 2025 1x1.webp"

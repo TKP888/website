@@ -24,7 +24,8 @@ export default function ExperienceSection({ items }: ExperienceSectionProps) {
 
   const checkScrollPosition = useCallback(() => {
     if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      const { scrollLeft, scrollWidth, clientWidth } =
+        scrollContainerRef.current;
       setShowLeftArrow(scrollLeft > 0);
       setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
     }
@@ -78,7 +79,10 @@ export default function ExperienceSection({ items }: ExperienceSectionProps) {
   const activeExperience = items[activeTab];
 
   return (
-    <section id="experience" className="w-full py-16 md:py-24 bg-slate-900 scroll-mt-28">
+    <section
+      id="experience"
+      className="w-full pt-16 pb-2 md:py-24 bg-slate-900 scroll-mt-28"
+    >
       <div className="container mx-auto px-4 max-w-6xl">
         <h2 className="text-4xl md:text-5xl font-bold text-slate-100 mb-12 text-center">
           Experience
