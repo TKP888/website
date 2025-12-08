@@ -173,6 +173,25 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
 
           <div>
             <h3 className="text-xl md:text-2xl font-semibold text-slate-200 mb-3">
+              Key Features
+            </h3>
+            <ul className="space-y-2 md:space-y-3">
+              {project.features.map((feature, index) => (
+                <li
+                  key={index}
+                  className="text-base md:text-lg text-slate-300 leading-relaxed flex"
+                >
+                  <span className="text-blue-400 mr-3 flex-shrink-0 leading-none self-start pt-1">
+                    ▹
+                  </span>
+                  <span className="flex-1">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-xl md:text-2xl font-semibold text-slate-200 mb-3">
               Tech Stack
             </h3>
             <div className="space-y-4">
@@ -249,25 +268,6 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   </div>
                 )}
             </div>
-          </div>
-
-          <div>
-            <h3 className="text-xl md:text-2xl font-semibold text-slate-200 mb-3">
-              Key Features
-            </h3>
-            <ul className="space-y-2 md:space-y-3">
-              {project.features.map((feature, index) => (
-                <li
-                  key={index}
-                  className="text-base md:text-lg text-slate-300 leading-relaxed flex"
-                >
-                  <span className="text-blue-400 mr-3 flex-shrink-0 leading-none self-start pt-1">
-                    ▹
-                  </span>
-                  <span className="flex-1">{feature}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
 
