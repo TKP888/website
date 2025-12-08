@@ -20,6 +20,8 @@ export default function ExperienceSection({ items }: ExperienceSectionProps) {
   const [activeTab, setActiveTab] = useState(0);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [showAllSkills, setShowAllSkills] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const checkScrollPosition = useCallback(() => {
@@ -28,30 +30,11 @@ export default function ExperienceSection({ items }: ExperienceSectionProps) {
         scrollContainerRef.current;
       setShowLeftArrow(scrollLeft > 0);
       setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 1);
+      const maxScroll = scrollWidth - clientWidth;
+      const progress = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
+      setScrollProgress(progress);
     }
   }, []);
-
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = scrollContainerRef.current.clientWidth * 0.8;
-      scrollContainerRef.current.scrollBy({
-        left: -scrollAmount,
-        behavior: "smooth",
-      });
-      setTimeout(checkScrollPosition, 300);
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = scrollContainerRef.current.clientWidth * 0.8;
-      scrollContainerRef.current.scrollBy({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
-      setTimeout(checkScrollPosition, 300);
-    }
-  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -72,6 +55,10 @@ export default function ExperienceSection({ items }: ExperienceSectionProps) {
     };
   }, [activeTab, items.length, checkScrollPosition]);
 
+  useEffect(() => {
+    setShowAllSkills(false);
+  }, [activeTab]);
+
   if (items.length === 0) {
     return null;
   }
@@ -89,74 +76,38 @@ export default function ExperienceSection({ items }: ExperienceSectionProps) {
         </h2>
 
         <div className="mb-8 relative">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={scrollLeft}
-              className={`md:hidden bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-blue-400 p-2 rounded-full transition-all duration-200 hover:scale-110 border border-slate-700 flex-shrink-0 ${
-                !showLeftArrow ? "opacity-0 pointer-events-none" : ""
-              }`}
-              aria-label="Scroll tabs left"
-              disabled={!showLeftArrow}
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
+          <div
+            ref={scrollContainerRef}
+            className="overflow-x-auto scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 relative"
+          >
+            <div className="flex flex-nowrap justify-center gap-1 md:gap-2 border-b border-slate-800 pb-4 min-w-max md:min-w-0">
+              {items.map((item, index) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab(index)}
+                  className={`px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm font-semibold rounded-t-lg transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
+                    activeTab === index
+                      ? "bg-slate-800 text-blue-400 border-b-2 border-blue-400"
+                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+                  }`}
+                >
+                  {item.role}
+                </button>
+              ))}
+            </div>
+          </div>
+          {(showLeftArrow || showRightArrow) && (
+            <div className="md:hidden mt-2 flex items-center justify-center gap-1">
+              <div className="h-1 w-12 bg-slate-700 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-blue-400 rounded-full transition-all duration-300"
+                  style={{
+                    width: `${scrollProgress}%`,
+                  }}
                 />
-              </svg>
-            </button>
-
-            <div
-              ref={scrollContainerRef}
-              className="overflow-x-auto scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 flex-1"
-            >
-              <div className="flex flex-nowrap justify-center gap-1 md:gap-2 border-b border-slate-800 pb-4 min-w-max md:min-w-0">
-                {items.map((item, index) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setActiveTab(index)}
-                    className={`px-3 py-2 md:px-4 md:py-3 text-xs md:text-sm font-semibold rounded-t-lg transition-all duration-200 whitespace-nowrap flex-shrink-0 ${
-                      activeTab === index
-                        ? "bg-slate-800 text-blue-400 border-b-2 border-blue-400"
-                        : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
-                    }`}
-                  >
-                    {item.role}
-                  </button>
-                ))}
               </div>
             </div>
-
-            <button
-              onClick={scrollRight}
-              className={`md:hidden bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-blue-400 p-2 rounded-full transition-all duration-200 hover:scale-110 border border-slate-700 flex-shrink-0 ${
-                !showRightArrow ? "opacity-0 pointer-events-none" : ""
-              }`}
-              aria-label="Scroll tabs right"
-              disabled={!showRightArrow}
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </div>
+          )}
         </div>
 
         <div className="bg-slate-800/50 rounded-lg p-6 md:p-8 lg:p-10">
@@ -171,24 +122,6 @@ export default function ExperienceSection({ items }: ExperienceSectionProps) {
               {activeExperience.startDate} - {activeExperience.endDate}
             </p>
           </div>
-
-          {activeExperience.skills.length > 0 && (
-            <div className="mb-6">
-              <h4 className="text-lg md:text-xl font-semibold text-slate-200 mb-3">
-                Skills & Technologies
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {activeExperience.skills.map((skill, index) => (
-                  <span
-                    key={index}
-                    className="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-sm md:text-base border border-blue-600/30"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
 
           {activeExperience.responsibilities.length > 0 && (
             <div>
@@ -210,6 +143,36 @@ export default function ExperienceSection({ items }: ExperienceSectionProps) {
                   )
                 )}
               </ul>
+            </div>
+          )}
+
+          {activeExperience.skills.length > 0 && (
+            <div className="mb-6 mt-6">
+              <h4 className="text-lg md:text-xl font-semibold text-slate-200 mb-3">
+                Skills & Technologies
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {activeExperience.skills.map((skill, index) => (
+                  <span
+                    key={index}
+                    className={`px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-sm md:text-base border border-blue-600/30 inline-block ${
+                      index < 5 || showAllSkills ? "" : "hidden md:inline-block"
+                    }`}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+              {activeExperience.skills.length > 5 && (
+                <button
+                  onClick={() => setShowAllSkills(!showAllSkills)}
+                  className="md:hidden mt-3 text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
+                >
+                  {showAllSkills
+                    ? "Show less"
+                    : `Show ${activeExperience.skills.length - 5} more`}
+                </button>
+              )}
             </div>
           )}
         </div>

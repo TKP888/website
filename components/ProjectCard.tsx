@@ -52,7 +52,7 @@ export default function ProjectCard({
 
   const cardContent = (
     <div
-      className="relative w-full h-[500px] md:h-[600px] overflow-hidden group cursor-pointer"
+      className="relative w-full h-[350px] md:h-[600px] overflow-hidden group cursor-pointer"
       onMouseEnter={startCycling}
       onMouseLeave={stopCycling}
     >

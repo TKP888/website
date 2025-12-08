@@ -8,6 +8,7 @@ export default function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleScrollTo = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -34,7 +35,12 @@ export default function Header() {
   };
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        menuButtonRef.current &&
+        !menuButtonRef.current.contains(event.target as Node)
+      ) {
         setIsMenuOpen(false);
       }
     };
@@ -62,9 +68,9 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 w-full border-b border-slate-800 bg-slate-900/95 backdrop-blur-sm z-50">
-      <nav className="container mx-auto px-4 py-8">
+      <nav className="container mx-auto px-4 py-4 md:py-8">
         <div className="flex items-center justify-between">
-          <div className="text-3xl font-bold text-slate-100">
+          <div className="text-xl md:text-3xl font-bold text-slate-100">
             <Link href="/" className="hover:text-blue-400 transition-colors">
               Antony Petsas
             </Link>
@@ -139,7 +145,11 @@ export default function Header() {
           </a>
 
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            ref={menuButtonRef}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMenuOpen(!isMenuOpen);
+            }}
             className="md:hidden text-slate-300 hover:text-blue-400 transition-colors p-2"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}

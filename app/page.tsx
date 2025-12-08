@@ -38,9 +38,9 @@ const experiences: ExperienceItem[] = [
       "Turbopack",
     ],
     responsibilities: [
-      "Developed full-stack web applications from concept to deployment, including e-commerce platforms and social media applications.",
-      "Implemented responsive user interfaces and secure authentication systems using React, Next.js, and modern backend technologies.",
-      "Deployed applications to production environments and maintained code quality through version control and testing practices.",
+      "Develop full-stack web applications from concept to deployment, including e-commerce platforms and social media applications.",
+      "Implement responsive user interfaces and secure authentication systems using React, Next.js, and modern backend technologies.",
+      "Deploy applications to production environments and maintain code quality through version control and testing practices.",
     ],
   },
   {
@@ -69,7 +69,7 @@ const experiences: ExperienceItem[] = [
 
     responsibilities: [
       "Briefed UGC creators and created organic video content tailored for TikTok, Instagram, and YouTube, achieving 50+ million views across all platforms.",
-      "Updating exisiting and creating new product packaging for EU expansion across France, Germany, Spain, and Italy.",
+      "Updating existing and creating new product packaging for EU expansion across France, Germany, Spain, and Italy.",
       "Created dynamic LED animations for live televised events reaching audiences of over 100,000 viewers.",
     ],
   },
@@ -95,9 +95,9 @@ const experiences: ExperienceItem[] = [
       "Photo Editing",
     ],
     responsibilities: [
-      "Planned, directed, and produced original video content and event photography for diverse clients, managing projects from concept to final delivery.",
-      "Executed end-to-end production including storyboarding, multi-camera operation, lighting design, and post-production editing.",
-      "Delivered high-quality visual content independently, ensuring client satisfaction through effective communication and project management.",
+      "Plan, direct, and produce original video content and event photography for diverse clients, managing projects from concept to final delivery.",
+      "Execute end-to-end production including storyboarding, multi-camera operation, lighting design, and post-production editing.",
+      "Deliver high-quality visual content independently, ensuring client satisfaction through effective communication and project management.",
     ],
   },
   {
@@ -148,7 +148,7 @@ const experiences: ExperienceItem[] = [
     responsibilities: [
       "Directed, filmed, and edited interviews, promos, and highlight reels for live events.",
       "Produced 2D motion graphics and performed colour grading for various productions.",
-      "Operated and programmed Dataton Watchout and vision mixing systems for live events.",
+      "Operated and programmed LED screens usingDataton Watchout and vision mixing systems for live events.",
     ],
   },
 ];

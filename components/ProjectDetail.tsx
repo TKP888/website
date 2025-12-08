@@ -65,11 +65,15 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
     };
   }, [project.imageUrls.length]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100">
-      <div className="container mx-auto px-4 py-12 max-w-6xl">
+      <div className="container mx-auto px-2 pt-1 pb-12 md:py-12 max-w-6xl">
         <div className="mb-12">
-          <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] rounded-lg border-8 border-white overflow-hidden bg-slate-800">
+          <div className="relative w-full h-[250px] md:h-[500px] lg:h-[600px] rounded-lg border-8 border-white overflow-hidden bg-slate-800">
             {project.imageUrls.map((imageUrl, index) => (
               <Image
                 key={index}
@@ -87,7 +91,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           </div>
 
           {project.imageUrls.length > 1 && (
-            <div className="flex items-center justify-center gap-4 mt-4">
+            <div className="flex items-center justify-center gap-4  mt-4">
               <button
                 onClick={goToPrevious}
                 className="bg-slate-800 hover:bg-slate-700 text-white p-2 rounded-full transition-all duration-200 hover:scale-110 border border-slate-700"
@@ -147,7 +151,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         </div>
 
         <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-2">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-2 ">
             {project.title}
           </h1>
           {project.subtitle && (
