@@ -94,56 +94,38 @@ export const projects: ProjectItem[] = [
     title: "Small Business Website",
     subtitle: "Full Stack Website",
     imageUrls: [
-      "/projects/smallbusiness/comingsoon.jpg",
-      // "/projects/odinbook/ob2.jpg",
-      // "/projects/odinbook/ob3.jpg",
-      // "/projects/odinbook/ob4.jpg",
-      // "/projects/odinbook/ob5.jpg",
+      "/projects/smallbusiness/sb-1.jpg",
+      "/projects/smallbusiness/sb-2.jpg",
+      "/projects/smallbusiness/sb-3.jpg",
+      "/projects/smallbusiness/sb-4.jpg",
+      "/projects/smallbusiness/sb-5.jpg",
     ],
-    // href: "/projects/smallbusiness",
+    href: "/projects/smallbusiness",
     description: (
       <>
-        Odinbook is a Facebook-inspired social networking application developed
-        as my first full-stack project and final milestone in{" "}
-        <a
-          href="https://www.theodinproject.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-400 hover:text-blue-300 underline"
-        >
-          The Odin Project
-        </a>{" "}
-        curriculum. It includes user authentication, friend management, posting,
-        commenting, and real-time interactions. It combines a modern, responsive
-        UI with a solid backend that securely handles data storage and manages
-        user connections.
+        A business website for Vercoe Property Maintenance built with Next.js.
+        It includes service listings, project showcases, quote requests, and
+        customer reviews. Built with TypeScript and Tailwind CSS, with a
+        responsive design and dynamic routing.
       </>
     ),
     techStack: {
-      frontend: ["HTML", "CSS", "JavaScript"],
-      backend: [
-        "Node.js",
-        "Express",
-        "EJS",
-        "Prisma ORM",
-        "PostgreSQL",
-        "Passport.js",
-        "Bcrypt",
-        "Cloudinary",
-      ],
+      frontend: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+      backend: ["Node.js", "Supabase"],
       testing: ["Jest"],
-      devTools: ["ESLint"],
+      devTools: ["Turbopack", "ESLint"],
     },
     features: [
-      "User profiles and friend connections",
-      "Post creation and sharing",
-      "Like and comment functionality",
-      "Real-time notifications",
-      "Image upload and storage",
+      "Service listings with dynamic detail pages",
+      "Interactive project showcase with hover/tap overlays",
+      "Quote request form with UK postcode address lookup",
+      "Customer reviews carousel",
+      "Contact page with Google Maps integration",
       "Responsive design",
+      "Dynamic routing for service pages",
     ],
-    githubUrl: "https://github.com/TKP888/odinbook",
-    demoUrl: "https://odinbook-production-4ff2.up.railway.app/auth/login",
+    githubUrl: "https://github.com/TKP888/small-business-website",
+    demoUrl: "https://small-business-website-mu.vercel.app/",
   },
   {
     id: "portfolio",
