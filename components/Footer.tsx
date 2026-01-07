@@ -6,7 +6,8 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center space-y-4">
           <p className="text-slate-400">
-            © Antony Petsas 2025, All Rights Reserved
+            © Antony Petsas 2025 - {new Date().getFullYear()}. All Rights
+            Reserved
           </p>
           <div className="flex space-x-6">
             <Link

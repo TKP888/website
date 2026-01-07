@@ -56,7 +56,7 @@ export default function ContactSection() {
       <div className="container mx-auto px-4">
         {!isFormVisible ? (
           <div className="flex flex-col items-center justify-center text-center py-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-4 md:whitespace-nowrap">
               Interested in
               <br className="md:hidden" /> working together?
             </h2>
@@ -73,7 +73,7 @@ export default function ContactSection() {
         ) : (
           <div ref={formContainerRef} className="max-w-2xl mx-auto">
             <div className="mb-8 text-center">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-4 md:whitespace-nowrap">
                 Interested in
                 <br className="md:hidden" /> working together?
               </h2>
