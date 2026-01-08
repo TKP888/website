@@ -4,8 +4,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "My Portfolio",
-  description: "My portfolio showcasing my projects",
+  title: "Antony Petsas - Full Stack Developer",
+  description: "Antony Petsas - Full Stack Developer",
 };
 
 export default function RootLayout({

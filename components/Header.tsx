@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function Header() {
   const pathname = usePathname();
@@ -72,7 +73,13 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <div className="text-xl md:text-3xl font-bold text-slate-100">
             <Link href="/" className="hover:text-blue-400 transition-colors">
-              Antony Petsas
+              <Image
+                src="/AP_logo.svg"
+                alt="Antony Petsas Logo"
+                width={300}
+                height={300}
+                className="w-72 h-12"
+              />
             </Link>
           </div>
 
