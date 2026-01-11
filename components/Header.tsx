@@ -78,7 +78,7 @@ export default function Header() {
                 alt="Antony Petsas Logo"
                 width={300}
                 height={300}
-                className="w-72 h-12"
+                className="w-48 h-8 md:w-72 md:h-12"
               />
             </Link>
           </div>
@@ -88,7 +88,7 @@ export default function Header() {
               <Link
                 href="/#about"
                 onClick={(e) => handleScrollTo(e, "about")}
-                className="text-lg text-slate-300 hover:text-blue-400 transition-colors"
+                className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
               >
                 About
               </Link>
@@ -97,7 +97,7 @@ export default function Header() {
               <Link
                 href="/#projects"
                 onClick={(e) => handleScrollTo(e, "projects")}
-                className="text-lg text-slate-300 hover:text-blue-400 transition-colors"
+                className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
               >
                 Projects
               </Link>
@@ -106,7 +106,7 @@ export default function Header() {
               <Link
                 href="/#experience"
                 onClick={(e) => handleScrollTo(e, "experience")}
-                className="text-lg text-slate-300 hover:text-blue-400 transition-colors"
+                className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
               >
                 Experience
               </Link>
@@ -115,7 +115,7 @@ export default function Header() {
               <Link
                 href="/#contact"
                 onClick={(e) => handleScrollTo(e, "contact")}
-                className="text-lg text-slate-300 hover:text-blue-400 transition-colors"
+                className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
               >
                 Contact
               </Link>
@@ -126,7 +126,7 @@ export default function Header() {
             href="/Antony_Petsas_CV_2026.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center justify-center px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold rounded-lg transition-colors duration-200 border border-slate-700"
+            className="hidden md:inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200 border border-slate-700"
           >
             <svg
               className="w-5 h-5 mr-2"
@@ -198,12 +198,12 @@ export default function Header() {
             ref={menuRef}
             className="md:hidden absolute top-full left-0 right-0 bg-slate-900 border-b border-slate-800 shadow-lg animate-in slide-in-from-top duration-200"
           >
-            <ul className="flex flex-col py-4">
+            <ul className="flex flex-col items-center py-4">
               <li>
                 <Link
                   href="/#about"
                   onClick={(e) => handleScrollTo(e, "about")}
-                  className="block px-4 py-3 text-lg text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors"
+                  className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
                 >
                   About
                 </Link>
@@ -212,7 +212,7 @@ export default function Header() {
                 <Link
                   href="/#projects"
                   onClick={(e) => handleScrollTo(e, "projects")}
-                  className="block px-4 py-3 text-lg text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors"
+                  className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
                 >
                   Projects
                 </Link>
@@ -221,7 +221,7 @@ export default function Header() {
                 <Link
                   href="/#experience"
                   onClick={(e) => handleScrollTo(e, "experience")}
-                  className="block px-4 py-3 text-lg text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors"
+                  className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
                 >
                   Experience
                 </Link>
@@ -230,7 +230,7 @@ export default function Header() {
                 <Link
                   href="/#contact"
                   onClick={(e) => handleScrollTo(e, "contact")}
-                  className="block px-4 py-3 text-lg text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors"
+                  className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
                 >
                   Contact
                 </Link>
@@ -241,7 +241,7 @@ export default function Header() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsMenuOpen(false)}
-                  className="inline-flex items-center justify-center w-full px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold rounded-lg transition-colors duration-200 border border-slate-700"
+                  className="inline-flex items-center justify-center w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-slate-100 font-semibold rounded-lg transition-colors duration-200 border border-slate-700"
                 >
                   <svg
                     className="w-5 h-5 mr-2"

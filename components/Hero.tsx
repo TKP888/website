@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section
       id="about"
-      className="container mx-auto px-4 min-h-[calc(100vh-200px)] flex items-center justify-center scroll-mt-28"
+      className="container mx-auto px-4 min-h-[calc(100vh-200px)] pb-12 md:pb-16 lg:pb-24 flex items-center justify-center scroll-mt-28"
     >
       <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 w-full max-w-6xl">
         <div className="flex-shrink-0 mt-6 md:mt-0">
@@ -39,12 +39,12 @@ export default function Hero() {
             creativity, problem-solving, and collaborative project management to
             deliver high-quality, user-focused solutions.
           </p>
-          <div className="mt-6">
+          <div className="mt-6 ">
             <a
               href="https://github.com/TKP888"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 py-3 bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold rounded-lg transition-colors duration-200 border border-slate-700"
+              className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200 border border-slate-700"
             >
               <svg
                 className="w-5 h-5 mr-2"

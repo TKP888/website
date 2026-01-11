@@ -10,9 +10,11 @@
 
   body {
     @apply bg-slate-900 text-slate-100;
-    background-image: 
-      linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)),
-      url('/background.jpg');
+    background-image: linear-gradient(
+        rgba(15, 23, 42, 0.6),
+        rgba(15, 23, 42, 0.6)
+      ),
+      url("/background.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -52,6 +54,15 @@
 
 .animate-fadeOut {
   animation: fadeOut 1.5s ease-out;
+}
+
+.projects-background {
+  background-image: linear-gradient(#f2f3f4, #f2f3f4);
+  /* url("/background2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat; */
 }
 
 @layer utilities {

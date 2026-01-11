@@ -132,7 +132,7 @@ export const projects: ProjectItem[] = [
     title: "Portfolio Website",
     subtitle: "Frontend Website",
     imageUrls: [
-      "/projects/portfolio/comingsoon.jpg",
+      "/projects/portfolio/comingsoonimg.jpg",
       // "/projects/odinbook/ob2.jpg",
       // "/projects/odinbook/ob3.jpg",
       // "/projects/odinbook/ob4.jpg",

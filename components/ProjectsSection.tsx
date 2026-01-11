@@ -27,10 +27,10 @@ export default function ProjectsSection({ items }: ProjectsSectionProps) {
   return (
     <section
       id="projects"
-      className="w-full pt-16 pb-1 md:py-24 bg-slate-900 scroll-mt-28"
+      className="w-full pt-16 pb-12 md:py-24 bg-slate-900 projects-background scroll-mt-28"
     >
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl font-bold text-slate-100 mb-12 text-center">
+        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-12 text-center">
           Recent Projects
         </h2>
 
