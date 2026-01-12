@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "Antony Petsas - Full Stack Developer",
@@ -19,6 +20,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-grow pt-20 md:pt-28">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
