@@ -6,8 +6,7 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
           <p className="text-slate-400 whitespace-nowrap text-sm md:text-base">
-            © Antony Petsas 2025 - {new Date().getFullYear()}. All Rights
-            Reserved
+            © Antony Petsas {new Date().getFullYear()}. All Rights Reserved
           </p>
           <div className="flex space-x-6">
             <Link

@@ -1,10 +1,11 @@
 import Image from "next/image";
+import ShowreelButton from "./ShowreelButton";
 
 export default function Hero() {
   return (
     <section
       id="about"
-      className="container mx-auto px-4 min-h-[calc(100vh-200px)] pb-12 md:pb-16 lg:pb-24 flex items-center justify-center scroll-mt-28"
+      className="container mx-auto px-4 min-h-[calc(100vh-5rem)] md:min-h-[calc(100vh-7rem)] pb-12 md:pb-16 lg:pb-24 flex items-center justify-center scroll-mt-28"
     >
       <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 w-full max-w-6xl">
         <div className="flex-shrink-0 mt-6 md:mt-0">
@@ -21,30 +22,27 @@ export default function Hero() {
 
         <div className="flex-1 text-center md:text-left">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-4">
-            Full Stack Developer
+            Videographer, Editor &{" "}
+            <span className="text-blue-400">Developer</span>
           </h1>
-          <h2 className="text-2xl md:text-3xl text-slate-300 mb-6"></h2>
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed max-w-3xl">
-            I&apos;m Antony, a{" "}
-            <strong className="text-slate-100">self-taught</strong> full stack
-            developer specialising in building fast, responsive, and
-            user-friendly web applications with modern tools like{" "}
-            <strong className="text-slate-100">TypeScript</strong>,{" "}
+          <h2 className="text-2xl md:text-4xl text-slate-300 mb-6"></h2>
+          <p className="text-xl md:text-4xl text-slate-300 leading-relaxed max-w-3xl">
+            Since 2015 I've worked across videography, photography, editing and
+            post-production, taking on projects ranging from live events to
+            commercial work. I also build for the web, creating sites and
+            applications using
+            <strong className="text-slate-100"> TypeScript</strong>,{" "}
             <strong className="text-slate-100">React</strong>, and{" "}
             <strong className="text-slate-100">Next.js</strong>.
           </p>
-          <p className="text-xl md:text-2xl text-slate-300 leading-relaxed max-w-3xl mt-4">
-            I have <strong className="text-slate-100">over a decade</strong> of
-            experience in creative media, combining technical expertise with
-            creativity, problem-solving, and collaborative project management to
-            deliver high-quality, user-focused solutions.
-          </p>
+
           <div className="mt-6 ">
+            <ShowreelButton />
             <a
               href="https://github.com/TKP888"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200 border border-slate-700"
+              className="inline-flex items-center justify-center px-6 py-3 ml-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors duration-200 border border-slate-700"
             >
               <svg
                 className="w-5 h-5 mr-2"
@@ -58,7 +56,24 @@ export default function Hero() {
                   clipRule="evenodd"
                 />
               </svg>
-              View my GitHub
+              View GitHub
+            </a>
+
+            <a
+              href="https://linkedin.com/in/akpetsas"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 ml-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors duration-200 border border-slate-700"
+            >
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+              View LinkedIn
             </a>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import ClientsSection from "@/components/ClientsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import ContactSection from "@/components/ContactSection";
@@ -9,7 +10,7 @@ const experiences: ExperienceItem[] = [
   {
     id: "exp-1",
     company: "Freelance",
-    role: "Full Stack Developer",
+    role: "Freelance Developer",
     startDate: "Nov 2023",
     endDate: "Present",
     skills: [
@@ -148,7 +149,7 @@ const experiences: ExperienceItem[] = [
     responsibilities: [
       "Directed, filmed, and edited interviews, promos, and highlight reels for live events.",
       "Produced 2D motion graphics and performed colour grading for various productions.",
-      "Operated and programmed LED screens usingDataton Watchout and vision mixing systems for live events.",
+      "Operated and programmed LED screens using Dataton Watchout and vision mixing systems for live events.",
     ],
   },
 ];
@@ -157,6 +158,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <ClientsSection />
       <ProjectsSection items={projects} />
       <ExperienceSection items={experiences} />
       <ContactSection />

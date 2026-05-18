@@ -4,16 +4,18 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleScrollTo = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    targetId: string
+    targetId: string,
   ) => {
     if (pathname !== "/") {
       return;
@@ -67,209 +69,251 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY || 0;
+      // Small hysteresis to prevent jitter near the threshold.
+      // Wait a bit longer before expanding; collapse sooner on the way back up.
+      setIsScrolled((prev) => (prev ? y > 40 : y > 90));
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 w-full border-b border-slate-800 bg-slate-900/95 backdrop-blur-sm z-50">
-      <nav className="container mx-auto px-4 py-4 md:py-8">
-        <div className="flex items-center justify-between">
-          <div className="text-xl md:text-3xl font-bold text-slate-100">
-            <Link href="/" className="hover:text-blue-400 transition-colors">
-              <Image
-                src="/AP_logo.svg"
-                alt="Antony Petsas Logo"
-                width={300}
-                height={300}
-                className="w-48 h-8 md:w-72 md:h-12"
-              />
-            </Link>
-          </div>
-
-          <ul className="hidden md:flex space-x-6">
-            <li>
-              <Link
-                href="/#about"
-                onClick={(e) => handleScrollTo(e, "about")}
-                className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/#projects"
-                onClick={(e) => handleScrollTo(e, "projects")}
-                className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
-              >
-                Projects
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/#experience"
-                onClick={(e) => handleScrollTo(e, "experience")}
-                className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
-              >
-                Experience
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/#contact"
-                onClick={(e) => handleScrollTo(e, "contact")}
-                className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
-
-          <a
-            href="/Antony_Petsas_CV_2026.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200 border border-slate-700"
-          >
-            <svg
-              className="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-              />
-            </svg>
-            View CV
-          </a>
-
-          <button
-            ref={menuButtonRef}
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsMenuOpen(!isMenuOpen);
-            }}
-            className="md:hidden text-slate-300 hover:text-blue-400 transition-colors p-2"
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? (
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
-          </button>
-        </div>
-
-        {isMenuOpen && (
-          <div
-            ref={menuRef}
-            className="md:hidden absolute top-full left-0 right-0 bg-slate-900 border-b border-slate-800 shadow-lg animate-in slide-in-from-top duration-200"
-          >
-            <ul className="flex flex-col items-center py-4">
-              <li>
+    <header className="fixed top-0 left-0 right-0 z-50">
+      <div className="w-full px-4 md:px-6 pt-4 md:pt-6">
+        <motion.div
+          layout
+          animate={isScrolled ? "scrolled" : "top"}
+          variants={{
+            top: { borderRadius: 9999 },
+            scrolled: { borderRadius: 9999 },
+          }}
+          transition={
+            isScrolled
+              ? { type: "spring", stiffness: 260, damping: 30, mass: 1.2 }
+              : { type: "spring", stiffness: 180, damping: 34, mass: 1.6 }
+          }
+          className={[
+            "relative w-full mx-auto border border-slate-800 backdrop-blur-sm",
+            isScrolled
+              ? "bg-slate-900/95 shadow-lg max-w-none"
+              : "bg-slate-900/75 shadow-md max-w-6xl",
+          ].join(" ")}
+        >
+          <nav className="relative px-4 md:px-6 py-4 md:py-6">
+            <div className="flex items-center justify-between">
+              <div className="text-xl md:text-3xl font-bold text-slate-100">
                 <Link
-                  href="/#about"
-                  onClick={(e) => handleScrollTo(e, "about")}
-                  className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
+                  href="/"
+                  className="hover:text-blue-400 transition-colors"
                 >
-                  About
+                  <Image
+                    src="/ap-logo-v2.svg"
+                    alt="Antony Petsas Logo"
+                    width={300}
+                    height={300}
+                    className="w-48 h-8 md:w-72 md:h-12"
+                  />
                 </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#projects"
-                  onClick={(e) => handleScrollTo(e, "projects")}
-                  className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
+              </div>
+
+              <ul className="hidden md:flex space-x-6">
+                <li>
+                  <Link
+                    href="/#about"
+                    onClick={(e) => handleScrollTo(e, "about")}
+                    className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
+                  >
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/#projects"
+                    onClick={(e) => handleScrollTo(e, "projects")}
+                    className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
+                  >
+                    Projects
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/#experience"
+                    onClick={(e) => handleScrollTo(e, "experience")}
+                    className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
+                  >
+                    Experience
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/#contact"
+                    onClick={(e) => handleScrollTo(e, "contact")}
+                    className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
+                  >
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+
+              <a
+                href="/Antony_Petsas_CV_2026.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors duration-200 border border-slate-700"
+              >
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#experience"
-                  onClick={(e) => handleScrollTo(e, "experience")}
-                  className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
-                >
-                  Experience
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#contact"
-                  onClick={(e) => handleScrollTo(e, "contact")}
-                  className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
-                >
-                  Contact
-                </Link>
-              </li>
-              <li className="px-4 py-3 mt-2">
-                <a
-                  href="/Antony_Petsas_CV_2026.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="inline-flex items-center justify-center w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-slate-100 font-semibold rounded-lg transition-colors duration-200 border border-slate-700"
-                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+                View CV
+              </a>
+
+              <button
+                ref={menuButtonRef}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsMenuOpen(!isMenuOpen);
+                }}
+                className="md:hidden text-slate-300 hover:text-blue-400 transition-colors p-2"
+                aria-label="Toggle menu"
+                aria-expanded={isMenuOpen}
+              >
+                {isMenuOpen ? (
                   <svg
-                    className="w-5 h-5 mr-2"
+                    className="w-6 h-6"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    aria-hidden="true"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      d="M6 18L18 6M6 6l12 12"
                     />
+                  </svg>
+                ) : (
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      d="M4 6h16M4 12h16M4 18h16"
                     />
                   </svg>
-                  View CV
-                </a>
-              </li>
-            </ul>
-          </div>
-        )}
-      </nav>
+                )}
+              </button>
+            </div>
+
+            {isMenuOpen && (
+              <div
+                ref={menuRef}
+                className={[
+                  "md:hidden absolute top-full left-0 right-0 bg-slate-900 border-t border-slate-800 shadow-lg",
+                  "animate-in slide-in-from-top duration-200",
+                  isScrolled ? "rounded-b-2xl" : "rounded-b-[2rem]",
+                ].join(" ")}
+              >
+                <ul className="flex flex-col items-center py-4">
+                  <li>
+                    <Link
+                      href="/#about"
+                      onClick={(e) => handleScrollTo(e, "about")}
+                      className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
+                    >
+                      About
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/#projects"
+                      onClick={(e) => handleScrollTo(e, "projects")}
+                      className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
+                    >
+                      Projects
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/#experience"
+                      onClick={(e) => handleScrollTo(e, "experience")}
+                      className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
+                    >
+                      Experience
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/#contact"
+                      onClick={(e) => handleScrollTo(e, "contact")}
+                      className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
+                    >
+                      Contact
+                    </Link>
+                  </li>
+                  <li className="px-4 py-3 mt-2 w-full">
+                    <a
+                      href="/Antony_Petsas_CV_2026.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="inline-flex items-center justify-center w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-slate-100 font-semibold rounded-lg transition-colors duration-200 border border-slate-700"
+                    >
+                      <svg
+                        className="w-5 h-5 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        />
+                      </svg>
+                      View CV
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </nav>
+        </motion.div>
+      </div>
     </header>
   );
 }

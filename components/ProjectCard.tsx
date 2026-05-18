@@ -52,7 +52,7 @@ export default function ProjectCard({
 
   const cardContent = (
     <div
-      className="relative w-full h-[350px] md:h-[600px] overflow-hidden group cursor-pointer"
+      className="relative w-full h-[175px] md:h-[300px] overflow-hidden group cursor-pointer"
       onMouseEnter={startCycling}
       onMouseLeave={stopCycling}
     >
@@ -73,13 +73,13 @@ export default function ProjectCard({
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-      <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+      <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
         {subtitle && (
-          <p className="text-sm md:text-base text-slate-300 mb-2 opacity-90">
+          <p className="text-xs md:text-sm text-slate-300 mb-1 opacity-90">
             {subtitle}
           </p>
         )}
-        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+        <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2">
           {title}
         </h3>
       </div>

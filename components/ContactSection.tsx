@@ -51,39 +51,50 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="w-full py-16  md:py-24 bg-slate-900 scroll-mt-28"
+      className="w-full min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-800 via-blue-700 to-gray-900 scroll-mt-28"
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 flex flex-col items-center justify-center flex-1 w-full">
         {!isFormVisible ? (
-          <div className="flex flex-col items-center justify-center text-center py-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-4 md:whitespace-nowrap">
-              Interested in
-              <br className="md:hidden" /> working together?
+          <div className="flex flex-col items-center justify-center text-center">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-4">
+              Have a project in mind?
             </h2>
-            <p className="text-xl md:text-2xl text-slate-300 mb-8">
-              Let&apos;s connect.
+            <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-6">
+              Let&apos;s build something great{" "}
+              <span className="text-blue-400">together</span>
+            </h3>
+            <p className="text-lg text-slate-300 mb-8 max-w-prose">
+              Whether you have a clear project in mind or just want to explore
+              an idea, feel free to reach out and start a conversation.
             </p>
             <button
               onClick={handleButtonClick}
-              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors duration-200"
+              className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full shadow-lg transition-colors duration-200"
             >
-              Say hello
+              Get in touch
             </button>
           </div>
         ) : (
-          <div ref={formContainerRef} className="max-w-2xl mx-auto">
-            <div className="mb-8 text-center">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-4 md:whitespace-nowrap">
-                Interested in
-                <br className="md:hidden" /> working together?
+          <div
+            ref={formContainerRef}
+            className="flex flex-col items-center w-full"
+          >
+            <div className="flex flex-col items-center justify-center text-center mb-8 w-full">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-4">
+                Have a project in mind?
               </h2>
-              <p className="text-xl md:text-2xl text-slate-300">
-                Let&apos;s connect.
+              <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-6">
+                Let&apos;s build something great{" "}
+                <span className="text-blue-400">together</span>
+              </h3>
+              <p className="text-lg text-slate-300 mb-8 max-w-prose">
+                Whether you have a clear project in mind or just want to explore
+                an idea, feel free to reach out and start a conversation.
               </p>
             </div>
 
             <form
-              className={`bg-slate-800/50 rounded-lg p-6 md:p-8 space-y-6 ${
+              className={`w-full max-w-2xl mx-auto bg-slate-800/50 rounded-lg p-6 md:p-8 space-y-6 ${
                 isClosing ? "animate-fadeOut" : "animate-fadeIn"
               }`}
               action={formspreeEndpoint}
@@ -93,7 +104,7 @@ export default function ContactSection() {
 
                 if (!formspreeEndpoint) {
                   console.error(
-                    "Formspree endpoint not configured. Please set NEXT_PUBLIC_FORMSPREE_ENDPOINT in your .env.local file"
+                    "Formspree endpoint not configured. Please set NEXT_PUBLIC_FORMSPREE_ENDPOINT in your .env.local file",
                   );
                   setSubmitStatus("error");
                   return;
@@ -109,7 +120,7 @@ export default function ContactSection() {
                   if (process.env.NODE_ENV === "development") {
                     console.log(
                       "Submitting to Formspree endpoint:",
-                      formspreeEndpoint
+                      formspreeEndpoint,
                     );
                   }
 
@@ -140,7 +151,7 @@ export default function ContactSection() {
 
                       if (errorData.errors) {
                         const errorMessages = Object.values(
-                          errorData.errors
+                          errorData.errors,
                         ).flat();
                         errorMessage = errorMessages.join(", ");
                       } else if (errorData.error) {

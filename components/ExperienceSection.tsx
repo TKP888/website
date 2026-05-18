@@ -68,7 +68,7 @@ export default function ExperienceSection({ items }: ExperienceSectionProps) {
   return (
     <section
       id="experience"
-      className="w-full pt-16 pb-2 md:py-24 bg-slate-900 scroll-mt-28"
+      className="w-full pt-16 pb-2 md:py-24 scroll-mt-28"
     >
       <div className="container mx-auto px-4 max-w-6xl">
         <h2 className="text-4xl md:text-5xl font-bold text-slate-100 mb-12 text-center">
@@ -140,7 +140,7 @@ export default function ExperienceSection({ items }: ExperienceSectionProps) {
                       </span>
                       <span className="flex-1">{responsibility}</span>
                     </li>
-                  )
+                  ),
                 )}
               </ul>
             </div>
