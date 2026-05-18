@@ -5,8 +5,8 @@ import Footer from "@/components/Footer";
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
-  title: "Antony Petsas - Full Stack Developer",
-  description: "Antony Petsas - Full Stack Developer",
+  title: "Antony Petsas - Videographer, Editor & Developer",
+  description: "Antony Petsas - Videographer, Editor & Developer",
 };
 
 export default function RootLayout({
