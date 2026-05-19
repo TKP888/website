@@ -78,8 +78,8 @@ export default function ClientsSection() {
     >
       <div className="mx-auto w-full max-w-none px-4 md:px-8">
         <h2 className="mb-4 text-center text-2xl font-bold text-slate-50 md:mb-6 md:text-3xl">
-          Brands I&apos;ve Had the Pleasure of
-          <br className="md:hidden" /> Working With
+          Brands I&apos;ve had the pleasure of
+          <br className="md:hidden" /> working with
         </h2>
 
         <p id="clients-marquee-desc" className="sr-only">
