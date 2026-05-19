@@ -277,7 +277,7 @@ export default function Header() {
                       Contact
                     </Link>
                   </li>
-                  <li className="px-4 py-3 mt-2 w-full">
+                  {/* <li className="px-4 py-3 mt-2 w-full">
                     <a
                       href="/Antony_Petsas_CV_2026.pdf"
                       target="_blank"
@@ -307,7 +307,7 @@ export default function Header() {
                       </svg>
                       View CV
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             )}
