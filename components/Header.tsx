@@ -153,14 +153,14 @@ export default function Header() {
                   <Link
                     href="/#contact"
                     onClick={(e) => handleScrollTo(e, "contact")}
-                    className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
+                    className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors pr-8"
                   >
                     Contact
                   </Link>
                 </li>
               </ul>
 
-              <a
+              {/* <a
                 href="/Antony_Petsas_CV_2026.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -187,7 +187,7 @@ export default function Header() {
                   />
                 </svg>
                 View CV
-              </a>
+              </a> */}
 
               <button
                 ref={menuButtonRef}
