@@ -8,7 +8,10 @@ const customerCode =
 const videoUid =
   process.env.NEXT_PUBLIC_CF_STREAM_VIDEO_UID_SHOWREEL?.trim() ?? "";
 
-export default function ShowreelButton() {
+const buttonBaseClassName =
+  "inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors duration-200 border border-slate-700";
+
+export default function ShowreelButton({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
 
   const close = useCallback(() => setOpen(false), []);
@@ -37,7 +40,7 @@ export default function ShowreelButton() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors duration-200 border border-slate-700"
+        className={[buttonBaseClassName, className].filter(Boolean).join(" ")}
       >
         <svg
           className="w-5 h-5 mr-2 shrink-0"

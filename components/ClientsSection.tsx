@@ -7,17 +7,17 @@ import type { Client } from "@/data/clients";
 import { clients } from "@/data/clients";
 
 const LOGO_SLOT =
-  "relative flex h-[240px] w-[220px] shrink-0 items-center justify-center px-4 md:h-[272px] md:w-[280px] md:px-5";
+  "relative flex h-[160px] w-[140px] shrink-0 items-center justify-center px-3 md:h-[272px] md:w-[280px] md:px-5";
 
 function LogoSlot({ client }: { client: Client }) {
   const inner = (
-    <div className="relative h-[176px] w-full md:h-[208px]">
+    <div className="relative h-[120px] w-full md:h-[208px]">
       <Image
         src={client.logoSrc}
         alt={client.logoAlt}
         fill
         className="object-contain object-center"
-        sizes="(max-width: 768px) 220px, 280px"
+        sizes="(max-width: 768px) 140px, 280px"
       />
     </div>
   );
@@ -54,7 +54,7 @@ export default function ClientsSection() {
         aria-label="Clients"
       >
         <div className="mx-auto w-full max-w-none px-4 md:px-8">
-          <h2 className="mb-6 text-center text-2xl font-bold text-slate-900 md:text-3xl">
+          <h2 className="mb-4 text-center text-2xl font-bold text-slate-900 md:mb-6 md:text-3xl">
             A few of the clients I've worked with over the years
           </h2>
           <div
@@ -73,12 +73,13 @@ export default function ClientsSection() {
   return (
     <section
       id="clients"
-      className="w-full scroll-mt-28 bg-gradient-to-b from-slate-900 via-blue-500 to-sky-300  md:pt-12"
+      className="w-full scroll-mt-28 bg-gradient-to-b from-slate-900 via-blue-500 to-sky-300 py-8 md:py-12"
       aria-label="Clients"
     >
       <div className="mx-auto w-full max-w-none px-4 md:px-8">
-        <h2 className=" text-center text-2xl font-bold text-slate-50 md:text-3xl">
-          Brands I've Had the Pleasure of Working With
+        <h2 className="mb-4 text-center text-2xl font-bold text-slate-50 md:mb-6 md:text-3xl">
+          Brands I&apos;ve Had the Pleasure of
+          <br className="md:hidden" /> Working With
         </h2>
 
         <p id="clients-marquee-desc" className="sr-only">
@@ -86,7 +87,7 @@ export default function ClientsSection() {
         </p>
 
         <div
-          className="relative overflow-hidden"
+          className="relative mt-2 overflow-hidden md:mt-0"
           aria-describedby="clients-marquee-desc"
         >
           <div

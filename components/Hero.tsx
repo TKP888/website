@@ -8,7 +8,7 @@ export default function Hero() {
       className="container mx-auto px-4 min-h-[calc(100vh-5rem)] md:min-h-[calc(100vh-7rem)] pb-12 md:pb-16 lg:pb-24 flex items-center justify-center scroll-mt-28"
     >
       <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 w-full max-w-6xl">
-        <div className="flex-shrink-0 mt-6 md:mt-0">
+        <div className="flex-shrink-0">
           <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-8 border-whites shadow-lg">
             <Image
               src="/Ant 2025 1x1.webp"
@@ -36,13 +36,13 @@ export default function Hero() {
             <strong className="text-slate-100">Next.js</strong>.
           </p>
 
-          <div className="mt-6 ">
-            <ShowreelButton />
+          <div className="mt-6 flex flex-col items-center gap-3 md:flex-row md:flex-wrap md:items-center md:justify-start md:gap-4">
+            <ShowreelButton className="w-full max-w-xs md:w-auto" />
             <a
               href="https://github.com/TKP888"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 py-3 ml-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors duration-200 border border-slate-700"
+              className="inline-flex w-full max-w-xs items-center justify-center rounded-full border border-slate-700 bg-blue-600 px-6 py-3 font-semibold text-white transition-colors duration-200 hover:bg-blue-700 md:w-auto"
             >
               <svg
                 className="w-5 h-5 mr-2"
@@ -63,7 +63,7 @@ export default function Hero() {
               href="https://linkedin.com/in/akpetsas"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 py-3 ml-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors duration-200 border border-slate-700"
+              className="inline-flex w-full max-w-xs items-center justify-center rounded-full border border-slate-700 bg-blue-600 px-6 py-3 font-semibold text-white transition-colors duration-200 hover:bg-blue-700 md:w-auto"
             >
               <svg
                 className="w-5 h-5 mr-2"
