@@ -173,7 +173,7 @@ export const projects: ProjectItem[] = [
       "Lightweight",
     ],
     githubUrl: "https://github.com/TKP888/production_portfolio",
-    demoUrl: "https:/saulroland.com",
+    demoUrl: "https://saulroland.com",
   },
 
   // FILM PROJECTS
