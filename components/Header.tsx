@@ -142,6 +142,15 @@ export default function Header() {
                 </li>
                 <li>
                   <Link
+                    href="/#photography"
+                    onClick={(e) => handleScrollTo(e, "photography")}
+                    className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
+                  >
+                    Photography
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/#experience"
                     onClick={(e) => handleScrollTo(e, "experience")}
                     className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
@@ -257,6 +266,15 @@ export default function Header() {
                       className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
                     >
                       Projects
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/#photography"
+                      onClick={(e) => handleScrollTo(e, "photography")}
+                      className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
+                    >
+                      Photography
                     </Link>
                   </li>
                   <li>

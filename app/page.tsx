@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import ClientsSection from "@/components/ClientsSection";
 import ProjectsSection from "@/components/ProjectsSection";
+import PhotographySection from "@/components/PhotographySection";
 import ExperienceSection from "@/components/ExperienceSection";
 import ContactSection from "@/components/ContactSection";
 import type { ExperienceItem } from "@/components/ExperienceSection";
@@ -160,6 +161,7 @@ export default function Home() {
       <Hero />
       <ClientsSection />
       <ProjectsSection items={projects} />
+      <PhotographySection />
       <ExperienceSection items={experiences} />
       <ContactSection />
     </main>
