@@ -6,10 +6,29 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+const SECTION_IDS = [
+  "about",
+  "projects",
+  "photography",
+  "experience",
+  "contact",
+] as const;
+
+const NAV_ITEMS = [
+  { id: "about", label: "About" },
+  { id: "projects", label: "Projects" },
+  { id: "photography", label: "Photography" },
+  { id: "experience", label: "Experience" },
+  { id: "contact", label: "Contact" },
+] as const;
+
+const HEADER_OFFSET = 100;
+
 export default function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -24,10 +43,9 @@ export default function Header() {
     e.preventDefault();
     const element = document.getElementById(targetId);
     if (element) {
-      const headerOffset = 100;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition =
-        elementPosition + window.pageYOffset - headerOffset;
+        elementPosition + window.pageYOffset - HEADER_OFFSET;
 
       window.scrollTo({
         top: offsetPosition,
@@ -72,8 +90,6 @@ export default function Header() {
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY || 0;
-      // Small hysteresis to prevent jitter near the threshold.
-      // Wait a bit longer before expanding; collapse sooner on the way back up.
       setIsScrolled((prev) => (prev ? y > 40 : y > 90));
     };
 
@@ -82,27 +98,45 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveSection(null);
+      return;
+    }
+
+    const updateActiveSection = () => {
+      let current: string | null = null;
+      for (const id of SECTION_IDS) {
+        const element = document.getElementById(id);
+        if (element && element.getBoundingClientRect().top <= HEADER_OFFSET) {
+          current = id;
+        }
+      }
+      setActiveSection(current);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    return () => window.removeEventListener("scroll", updateActiveSection);
+  }, [pathname]);
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="w-full px-4 md:px-6 pt-4 md:pt-6">
         <motion.div
-          layout
-          animate={isScrolled ? "scrolled" : "top"}
-          variants={{
-            top: { borderRadius: 9999 },
-            scrolled: { borderRadius: 9999 },
+          initial={false}
+          animate={{
+            maxWidth: isScrolled ? "100%" : "72rem",
+            borderRadius: 9999,
+            backgroundColor: isScrolled
+              ? "rgba(15, 23, 42, 0.95)"
+              : "rgba(15, 23, 42, 0.75)",
+            boxShadow: isScrolled
+              ? "0 10px 15px -3px rgb(0 0 0 / 0.12), 0 4px 6px -4px rgb(0 0 0 / 0.12)"
+              : "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
           }}
-          transition={
-            isScrolled
-              ? { type: "spring", stiffness: 260, damping: 30, mass: 1.2 }
-              : { type: "spring", stiffness: 180, damping: 34, mass: 1.6 }
-          }
-          className={[
-            "relative w-full mx-auto border border-slate-800 backdrop-blur-sm",
-            isScrolled
-              ? "bg-slate-900/95 shadow-lg max-w-none"
-              : "bg-slate-900/75 shadow-md max-w-6xl",
-          ].join(" ")}
+          transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
+          className="relative w-full mx-auto border border-slate-800 backdrop-blur-sm"
         >
           <nav className="relative px-4 md:px-6 py-4 md:py-6">
             <div className="flex items-center justify-between">
@@ -121,82 +155,23 @@ export default function Header() {
                 </Link>
               </div>
 
-              <ul className="hidden md:flex space-x-6">
-                <li>
-                  <Link
-                    href="/#about"
-                    onClick={(e) => handleScrollTo(e, "about")}
-                    className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
-                  >
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/#projects"
-                    onClick={(e) => handleScrollTo(e, "projects")}
-                    className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
-                  >
-                    Projects
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/#photography"
-                    onClick={(e) => handleScrollTo(e, "photography")}
-                    className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
-                  >
-                    Photography
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/#experience"
-                    onClick={(e) => handleScrollTo(e, "experience")}
-                    className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors"
-                  >
-                    Experience
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/#contact"
-                    onClick={(e) => handleScrollTo(e, "contact")}
-                    className="text-xl font-extrabold text-slate-300 hover:text-blue-400 transition-colors pr-8"
-                  >
-                    Contact
-                  </Link>
-                </li>
+              <ul className="hidden md:flex items-baseline space-x-6">
+                {NAV_ITEMS.map((item) => (
+                  <li key={item.id} className="leading-none">
+                    <Link
+                      href={`/#${item.id}`}
+                      onClick={(e) => handleScrollTo(e, item.id)}
+                      className={[
+                        "inline-block font-extrabold leading-none text-slate-300 hover:text-blue-400 transition-[font-size,color] duration-300",
+                        activeSection === item.id ? "text-xl" : "text-base",
+                        item.id === "contact" ? "pr-8" : "",
+                      ].join(" ")}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
               </ul>
-
-              {/* <a
-                href="/Antony_Petsas_CV_2026.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden md:inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors duration-200 border border-slate-700"
-              >
-                <svg
-                  className="w-5 h-5 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                  />
-                </svg>
-                View CV
-              </a> */}
 
               <button
                 ref={menuButtonRef}
@@ -250,82 +225,17 @@ export default function Header() {
                 ].join(" ")}
               >
                 <ul className="flex flex-col items-center py-4">
-                  <li>
-                    <Link
-                      href="/#about"
-                      onClick={(e) => handleScrollTo(e, "about")}
-                      className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
-                    >
-                      About
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/#projects"
-                      onClick={(e) => handleScrollTo(e, "projects")}
-                      className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
-                    >
-                      Projects
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/#photography"
-                      onClick={(e) => handleScrollTo(e, "photography")}
-                      className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
-                    >
-                      Photography
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/#experience"
-                      onClick={(e) => handleScrollTo(e, "experience")}
-                      className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
-                    >
-                      Experience
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/#contact"
-                      onClick={(e) => handleScrollTo(e, "contact")}
-                      className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
-                    >
-                      Contact
-                    </Link>
-                  </li>
-                  {/* <li className="px-4 py-3 mt-2 w-full">
-                    <a
-                      href="/Antony_Petsas_CV_2026.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setIsMenuOpen(false)}
-                      className="inline-flex items-center justify-center w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-slate-100 font-semibold rounded-lg transition-colors duration-200 border border-slate-700"
-                    >
-                      <svg
-                        className="w-5 h-5 mr-2"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
+                  {NAV_ITEMS.map((item) => (
+                    <li key={item.id}>
+                      <Link
+                        href={`/#${item.id}`}
+                        onClick={(e) => handleScrollTo(e, item.id)}
+                        className="block px-4 py-3 text-xl font-extrabold text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-center w-full"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                        />
-                      </svg>
-                      View CV
-                    </a>
-                  </li> */}
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </div>
             )}
